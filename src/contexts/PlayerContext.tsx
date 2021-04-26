@@ -1,0 +1,20 @@
+import { createContext } from "react";
+
+type Episode = {
+  title: string;
+  members: string;
+  thumbnail: string;
+  duration: string;
+  url: string;
+};
+
+type PlayerContextData = {
+  episodes: Episode[];
+  currentEpisodeIndex: number;
+  isPlaying: boolean;
+  play: (episode: Episode) => void;
+  togglePlay: () => void;
+  setPlayingState: (state: boolean) => void;
+};
+
+export const PlayerContext = createContext({} as PlayerContextData);
