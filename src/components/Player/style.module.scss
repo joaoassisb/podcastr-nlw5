@@ -24,9 +24,6 @@
 
   footer {
     align-self: stretch;
-    &.empty {
-      opacity: 0.5;
-    }
   }
 }
 
@@ -95,13 +92,12 @@
 
   .slider {
     flex: 1;
-
-    .emptySlider {
-      width: 100%;
-      height: 4px;
-      background: var(--purple-300);
-      border-radius: 2px;
-    }
+  }
+  .emptySlider {
+    width: 100%;
+    height: 4px;
+    background: var(--purple-300);
+    border-radius: 2px;
   }
 }
 
@@ -117,15 +113,29 @@
     border: 0;
     font-size: 0;
 
+    transition: filter 0.2s;
+
+    &:hover:not(:disabled) {
+      filter: brightness(0.95);
+    }
+
+    &.isActive {
+      filter: invert(0.35) sepia(1) saturate(3) hue-rotate(100deg);
+    }
+
+    &:disabled {
+      cursor: not-allowed;
+      opacity: 0.5;
+    }
+
     &.playButton {
       width: 4rem;
       height: 4rem;
 
       border-radius: 1rem;
       background: var(--purple-400);
-      transition: filter 0.2s;
 
-      &:hover {
+      &:hover:not(:disabled) {
         filter: brightness(0.95);
       }
     }

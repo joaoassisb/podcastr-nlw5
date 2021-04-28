@@ -3,9 +3,9 @@ import { ptBR } from "date-fns/locale";
 import { GetStaticPaths, GetStaticProps } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import Head from "next/head";
 import { useRouter } from "next/router";
-import { useContext } from "react";
-import { PlayerContext } from "../../contexts/PlayerContext";
+import { usePlayer } from "../../contexts/PlayerContext";
 import { api } from "../../services/api";
 import { convertDurationToTimeString } from "../../utils/convertDurationToTimeString";
 
@@ -17,6 +17,7 @@ type Episode = {
   members: string;
   thumbnail: string;
   description: string;
+  duration: number;
   durationAsString: string;
   url: string;
   publishedAt: string;
@@ -28,10 +29,13 @@ type EpisodeProps = {
 
 export default function Episode({ episode }: EpisodeProps) {
   const router = useRouter();
-  const { play } = useContext(PlayerContext);
+  const { play } = usePlayer();
 
   return (
     <div className={styles.episode}>
+      <Head>
+        <title>{episode.title}</title>
+      </Head>
       <div className={styles.thumbnailContainer}>
         <Link href="/">
           <button type="button">
